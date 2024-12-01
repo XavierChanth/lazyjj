@@ -131,7 +131,7 @@ impl LogTab<'_> {
         get_head_index(&self.head, &self.log_output)
     }
 
-    fn refresh_log_output(&mut self, commander: &mut Commander) {
+    pub fn refresh_log_output(&mut self, commander: &mut Commander) {
         self.log_output = commander.get_log(&self.log_revset);
         self.log_output_text = match self.log_output.as_ref() {
             Ok(log_output) => log_output
@@ -142,7 +142,7 @@ impl LogTab<'_> {
         };
     }
 
-    fn refresh_head_output(&mut self, commander: &mut Commander) {
+    pub fn refresh_head_output(&mut self, commander: &mut Commander) {
         self.head_output = commander
             .get_commit_show(&self.head.commit_id, &self.diff_format)
             .map(|text| tabs_to_spaces(&text));

@@ -197,11 +197,14 @@ impl<'a> App<'a> {
                         self.get_log_tab(commander)?.set_head(commander, head);
                     }
                     Tab::Files => {
-                        self.get_files_tab(commander)?.refresh_files(commander)?;
+                        let tab = self.get_files_tab(commander)?;
+                        tab.refresh_files(commander)?;
+                        tab.refresh_diff(commander)?;
                     }
                     Tab::Bookmarks => {
-                        self.get_bookmarks_tab(commander)?
-                            .refresh_bookmark(commander);
+                        let tab = self.get_bookmarks_tab(commander)?;
+                        tab.refresh_bookmarks(commander);
+                        tab.refresh_bookmark(commander);
                     }
                     Tab::CommandLog => {
                         self.get_command_log_tab(commander)?.update(commander)?;
